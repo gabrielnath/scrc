@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SCRC — Strategic Crisis Response Command</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Courier+Prime:wght@400;700&family=Special+Elite&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAF7F0;
+    --paper-dim:#F1ECE0;
+    --ink:#221F1B;
+    --ink-soft:#665F54;
+    --rule:#DCD4C0;
+    --spine:#1C1A17;
+    --spine-text:#A9A294;
+    --spine-text-dim:#74705F;
+
+    --scrc:#3B5166;        /* SCRC parent accent — institutional steel-blue */
+    --scrc-soft:#7B93A3;
+    --scrc-wash:#E9EEF1;
+
+    --red:#7E3430;         /* ANUBIS */
+    --red-soft:#A9615C;
+    --steel:#6B6B63;       /* SILVER */
+    --steel-soft:#8A8A80;
+
+    --hades:#4A2438;       /* H.A.D.E.S. — the one entry the system can't format */
+    --glitch-a:#8B1E3F;
+    --glitch-b:#1F6E7A;
+  }
+  *{box-sizing:border-box;}
+  html{ scroll-behavior:smooth; }
+  html,body{ margin:0; }
+  body{
+    font-family:'Inter',sans-serif;
+    background:var(--spine);
+    color:var(--paper);
+  }
+  .serif{font-family:'Source Serif 4',serif;}
+  .mono{font-family:'Courier Prime',monospace;}
+  .typewriter{font-family:'Special Elite',cursive;}
+  a{ color:inherit; }
+  :focus-visible{ outline:2px solid var(--scrc-soft); outline-offset:2px; }
+
+  .paper-texture{
+    background-color:var(--paper);
+    background-image: radial-gradient(circle at 1px 1px, rgba(34,31,27,0.035) 1px, transparent 0);
+    background-size:3px 3px;
+    color:var(--ink);
+  }
+
+  /* ===== classification banners ===== */
+  .classband{
+    background:#0F0D0B; color:var(--spine-text-dim);
+    text-align:center; padding:6px 10px;
+    font-family:'Courier Prime',monospace; font-size:9.5px; letter-spacing:0.18em;
+    text-transform:uppercase; border-bottom:1px solid rgba(255,255,255,0.06);
+  }
+  footer .classband{ border-bottom:none; border-top:1px solid rgba(255,255,255,0.06); }
+
+  /* ===== nav ===== */
+  .site-nav{
+    position:sticky; top:0; z-index:20;
+    background:rgba(28,26,23,0.92); backdrop-filter:blur(6px);
+    border-bottom:1px solid rgba(255,255,255,0.07);
+    padding:12px 24px;
+    display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
+  }
+  .nav-mark{ display:flex; align-items:center; gap:10px; }
+  .nav-seal{
+    width:32px; height:32px; border:1.5px solid var(--scrc-soft); border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Special Elite',cursive; font-size:10.5px; letter-spacing:0.5px; color:var(--scrc-soft);
+    flex-shrink:0;
+  }
+  .nav-mark .n-title{ font-size:12px; letter-spacing:0.06em; color:#EFEAE0; }
+  .nav-mark .n-sub{ font-family:'Courier Prime',monospace; font-size:9px; color:var(--spine-text-dim); }
+  .nav-links{ display:flex; gap:22px; font-size:11.5px; letter-spacing:0.03em; }
+  .nav-links a{ text-decoration:none; color:var(--spine-text); transition:color .15s; }
+  .nav-links a:hover{ color:var(--paper); }
+  .nav-status{ display:flex; align-items:center; gap:7px; font-family:'Courier Prime',monospace; font-size:9.5px; letter-spacing:0.08em; color:var(--spine-text-dim); }
+  .nav-status .dot{ width:6px; height:6px; border-radius:50%; background:#6B8E5C; box-shadow:0 0 5px #6B8E5C; animation:pulse 2.6s ease-in-out infinite; }
+  @media (prefers-reduced-motion:no-preference){ .nav-status .dot{ animation:pulse 2.6s ease-in-out infinite; } }
+  @keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+
+  /* ===== hero ===== */
+  .hero{ padding:88px 24px 64px; text-align:center; }
+  .hero-eyebrow{
+    font-family:'Courier Prime',monospace; font-size:10.5px; letter-spacing:0.2em;
+    text-transform:uppercase; color:var(--scrc-soft); margin-bottom:18px;
+  }
+  .hero h1{
+    font-family:'Source Serif 4',serif; font-weight:700; font-size:clamp(40px,7vw,64px);
+    letter-spacing:0.01em; margin:0 0 10px; color:var(--paper);
+  }
+  .hero .expansion{
+    font-size:15px; color:var(--spine-text); margin:0 auto 22px; max-width:520px;
+  }
+  .hero .mandate{
+    font-family:'Courier Prime',monospace; font-size:11px; letter-spacing:0.1em;
+    text-transform:uppercase; color:var(--spine-text-dim);
+    border-top:1px solid rgba(255,255,255,0.1); border-bottom:1px solid rgba(255,255,255,0.1);
+    padding:14px 0; max-width:460px; margin:0 auto;
+  }
+
+  main{ max-width:960px; margin:0 auto; padding:0 24px 100px; }
+
+  .section-head{ text-align:center; margin:0 0 34px; }
+  .section-head .eyebrow{
+    font-family:'Courier Prime',monospace; font-size:10px; letter-spacing:0.16em;
+    text-transform:uppercase; color:var(--scrc-soft); margin-bottom:8px;
+  }
+  .section-head h2{ font-family:'Source Serif 4',serif; font-size:24px; margin:0; color:var(--paper); }
+
+  /* ===== mission sheet ===== */
+  .mission-sheet{
+    border:1px solid var(--rule);
+    box-shadow:0 1px 0 rgba(0,0,0,0.04), 0 20px 44px rgba(0,0,0,0.4);
+    margin-bottom:90px;
+  }
+  .mission-head{
+    background:var(--paper-dim); border-bottom:1px solid var(--rule);
+    padding:10px 28px; font-size:10px; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--ink-soft); display:flex; justify-content:space-between;
+  }
+  .mission-body{ padding:32px 32px 28px; }
+  .mission-body p{ font-size:13px; line-height:1.7; color:var(--ink-soft); max-width:64ch; }
+  .mission-body p + p{ margin-top:14px; }
+
+  .fact-grid{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:16px 20px;
+    border-top:1px solid var(--rule); margin-top:26px; padding-top:22px;
+  }
+  @media (max-width:640px){ .fact-grid{ grid-template-columns:1fr 1fr; } }
+  .fact-grid .k{ font-size:9px; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-soft); display:block; margin-bottom:4px; }
+  .fact-grid .v{ font-family:'Source Serif 4',serif; font-size:14px; }
+
+  /* ===== divisions legend ===== */
+  .legend{
+    display:flex; flex-wrap:wrap; gap:18px; justify-content:center;
+    margin-bottom:34px; font-family:'Courier Prime',monospace; font-size:10px;
+    letter-spacing:0.04em; color:var(--spine-text-dim);
+  }
+  .legend span{ display:inline-flex; align-items:center; gap:6px; }
+  .legend i{ width:7px; height:7px; border-radius:50%; display:inline-block; }
+
+  /* ===== divisions grid ===== */
+  .div-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:1px;
+    background:var(--rule); border:1px solid var(--rule);
+  }
+  @media (max-width:760px){ .div-grid{ grid-template-columns:1fr 1fr; } }
+  @media (max-width:520px){ .div-grid{ grid-template-columns:1fr; } }
+
+  .div-card{
+    background:var(--paper); padding:20px 20px 18px;
+    display:flex; flex-direction:column; gap:10px; min-height:200px;
+    text-decoration:none; color:var(--ink); position:relative;
+  }
+  .div-card.open{ transition:background .15s; }
+  .div-card.open:hover, .div-card.open:focus-visible{ background:var(--paper-dim); }
+  .div-card.locked{ cursor:not-allowed; background:var(--paper-dim); }
+
+  .dc-top{ display:flex; align-items:flex-start; justify-content:space-between; gap:8px; }
+  .dc-seal{
+    width:30px; height:30px; border-radius:50%; border:1.5px solid currentColor;
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+    font-family:'Special Elite',cursive; font-size:9.5px; letter-spacing:0.5px;
+  }
+  .dc-lock{ font-size:13px; color:var(--ink-soft); opacity:0.55; margin-top:2px; }
+  .dc-name{ font-family:'Source Serif 4',serif; font-size:15px; font-weight:600; margin:2px 0 0; }
+  .dc-full{ font-family:'Courier Prime',monospace; font-size:9px; color:var(--ink-soft); line-height:1.4; }
+  .dc-desc{ font-size:11.5px; color:var(--ink-soft); line-height:1.55; flex-grow:1; }
+  .dc-tag{
+    align-self:flex-start; font-family:'Courier Prime',monospace; font-size:9px; letter-spacing:0.06em;
+    text-transform:uppercase; padding:3px 8px; border:1px solid currentColor;
+  }
+
+  /* redaction — the real function line, painted over */
+  .redact{
+    background:var(--ink); color:transparent; border-radius:2px;
+    user-select:text; box-decoration-break:clone; -webkit-box-decoration-break:clone;
+  }
+  .redact::selection{ background:var(--ink); color:transparent; }
+
+  /* ===== H.A.D.E.S. — breaks the grid on purpose ===== */
+  .hades-row{ margin-top:1px; }
+  .hades-card{
+    background:#15100E; border:1px solid rgba(139,30,63,0.35);
+    padding:26px 28px; position:relative; overflow:hidden;
+    display:flex; flex-direction:column; gap:12px;
+  }
+  .hades-top{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+  .hades-seal{
+    width:34px; height:34px; border-radius:50%; border:1.5px solid var(--glitch-a);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Special Elite',cursive; font-size:10px; letter-spacing:0.5px; color:var(--glitch-a);
+    flex-shrink:0;
+  }
+  .hades-name{ font-family:'Source Serif 4',serif; font-size:17px; font-weight:600; color:#E7DCE1; }
+  .hades-full{ font-family:'Courier Prime',monospace; font-size:9px; color:#8C7C86; }
+  .hades-tag{
+    font-family:'Courier Prime',monospace; font-size:9px; letter-spacing:0.08em; text-transform:uppercase;
+    padding:3px 8px; border:1px solid var(--glitch-a); color:var(--glitch-a);
+  }
+  @media (prefers-reduced-motion:no-preference){
+    .hades-tag{ animation:tagpulse 2.6s ease-in-out infinite; }
+  }
+  @keyframes tagpulse{ 0%,100%{opacity:1;} 50%{opacity:0.45;} }
+
+  .hades-desc{ font-size:12px; line-height:1.6; color:#B7A9B0; max-width:64ch; }
+  .glitch-text{ position:relative; display:inline; }
+  .glitch-text::before, .glitch-text::after{
+    content:attr(data-text); position:absolute; left:0; top:0; width:100%; height:100%;
+    overflow:hidden; opacity:0.75;
+  }
+  .glitch-text::before{ color:var(--glitch-a); clip-path:inset(0 0 60% 0); }
+  .glitch-text::after{ color:var(--glitch-b); clip-path:inset(60% 0 0 0); }
+  @media (prefers-reduced-motion:no-preference){
+    .glitch-text::before{ animation:glitchTop 3.4s infinite steps(1,end); }
+    .glitch-text::after{ animation:glitchBottom 3.9s infinite steps(1,end); }
+  }
+  @keyframes glitchTop{
+    0%,88%,100%{ clip-path:inset(0 0 60% 0); transform:translate(0,0); }
+    90%{ clip-path:inset(15% 0 45% 0); transform:translate(-1.5px,0); }
+    93%{ clip-path:inset(35% 0 20% 0); transform:translate(1.5px,0); }
+    96%{ clip-path:inset(5% 0 55% 0); transform:translate(-1px,0); }
+  }
+  @keyframes glitchBottom{
+    0%,89%,100%{ clip-path:inset(60% 0 0 0); transform:translate(0,0); }
+    91%{ clip-path:inset(40% 0 15% 0); transform:translate(1.5px,0); }
+    94%{ clip-path:inset(55% 0 5% 0); transform:translate(-1.5px,0); }
+    97%{ clip-path:inset(50% 0 10% 0); transform:translate(1px,0); }
+  }
+
+  .hades-motto{
+    font-family:'Source Serif 4',serif; font-style:italic; font-size:12.5px; color:var(--glitch-a);
+    min-height:1.4em;
+  }
+  @media (prefers-reduced-motion:no-preference){
+    .hades-motto.flicker{ animation:mottoflicker 0.22s steps(2,end); }
+  }
+  @keyframes mottoflicker{ 0%,100%{opacity:1;} 40%{opacity:0.2;} 60%{opacity:0.85;} 80%{opacity:0.3;} }
+
+  /* corrupted words — brief noise in place of specific words, like a bad signal */
+  .corrupt-word{
+    font-family:'Courier Prime',monospace; color:var(--glitch-a);
+    transition:color .05s linear;
+  }
+  .corrupt-word.reveal{ color:#E7DCE1; }
+
+  footer .classband{ margin-top:0; }
+  .credit-line{ text-align:center; padding:16px; font-family:'Courier Prime',monospace; font-size:9px; color:var(--spine-text-dim); }
+</style>
+</head>
+<body>
+
+  <div class="classband">For Official Use Only — SCRC Public Network</div>
+
+  <nav class="site-nav">
+    <div class="nav-mark">
+      <div class="nav-seal">SCRC</div>
+      <div>
+        <div class="n-title">SCRC</div>
+        <div class="n-sub">Strategic Crisis Response Command</div>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#divisions">Divisions</a>
+    </div>
+    <div class="nav-status"><span class="dot"></span>NETWORK OPERATIONAL</div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-eyebrow">Joint Command Authority</div>
+    <h1 class="serif">SCRC</h1>
+    <p class="expansion serif">Strategic Crisis Response Command</p>
+    <p class="mandate">Coordinating specialized response across public and classified sectors</p>
+  </header>
+
+  <main>
+
+    <section id="about">
+      <div class="mission-sheet paper-texture">
+        <div class="mission-head">
+          <span>Mission Statement</span>
+          <span id="todayDate"></span>
+        </div>
+        <div class="mission-body">
+          <p>The Strategic Crisis Response Command coordinates a set of specialized divisions organized around a single principle: some problems cannot wait for jurisdiction to be sorted out first. SCRC exists to remove that delay.</p>
+          <p>Divisions operate with varying degrees of public visibility depending on function. Some maintain public-facing portals for coordination with field personnel and affiliated agents. Others do not, and are not required to explain why.</p>
+
+          <div class="fact-grid">
+            <div><span class="k">Divisions</span><span class="v">7 &nbsp;<span style="font-size:10px; color:var(--ink-soft);">(2 public)</span></span></div>
+            <div><span class="k">Jurisdiction</span><span class="v">Multinational</span></div>
+            <div><span class="k">Established</span><span class="v">[Classified]</span></div>
+            <div><span class="k">Reports To</span><span class="v">Joint Command</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="divisions">
+      <div class="section-head">
+        <div class="eyebrow">Divisions</div>
+        <h2 class="serif">What Falls Under SCRC</h2>
+      </div>
+
+      <div class="legend">
+        <span><i style="background:var(--red);"></i>Public Access</span>
+        <span><i style="background:var(--steel);"></i>Internal Access</span>
+        <span><i style="background:var(--ink-soft);"></i>Restricted</span>
+        <span><i style="background:var(--glitch-a);"></i>Undefined</span>
+      </div>
+
+      <div class="div-grid">
+
+        <a class="div-card open" href="https://anubis.pixelora.id" style="color:var(--red);">
+          <div class="dc-top">
+            <div class="dc-seal">ANB</div>
+            <span class="dc-tag">Public Access</span>
+          </div>
+          <div>
+            <div class="dc-name" style="color:var(--ink);">ANUBIS</div>
+            <div class="dc-full">Advanced National Unit of Bio-forensics and Intelligence Specialists</div>
+          </div>
+          <p class="dc-desc">Spying, gathering data, and investigating high-profile persons of interest. Public-facing, well-resourced, unremarkable on the surface.</p>
+        </a>
+
+        <a class="div-card open" href="https://sv.pixelora.id" style="color:var(--steel);">
+          <div class="dc-top">
+            <div class="dc-seal">SLV</div>
+            <span class="dc-tag">Internal Access</span>
+          </div>
+          <div>
+            <div class="dc-name" style="color:var(--ink);">SILVER</div>
+            <div class="dc-full">Strategic Intelligence for Lost Valuables, Evidence &amp; Recovery</div>
+          </div>
+          <p class="dc-desc">Custody and cataloguing of assets recovered in connection with active investigations. On paper, evidence only.</p>
+        </a>
+
+        <div class="div-card locked" style="color:var(--ink-soft);" tabindex="0">
+          <div class="dc-top">
+            <div class="dc-seal">ARE</div>
+            <span class="dc-tag">Restricted</span>
+          </div>
+          <div>
+            <div class="dc-name" style="color:var(--ink);">ARES</div>
+            <div class="dc-full">Assault, Reconnaissance, &amp; Elite Squad</div>
+          </div>
+          <p class="dc-desc">Standard <span class="redact">military division handling engagements beyond conventional special-forces capability, on a scale most nations don't disclose having</span>.</p>
+        </div>
+
+        <div class="div-card locked" style="color:var(--ink-soft);" tabindex="0">
+          <div class="dc-top">
+            <div class="dc-seal">GHO</div>
+            <span class="dc-tag">Restricted</span>
+          </div>
+          <div>
+            <div class="dc-name" style="color:var(--ink);">GHOST</div>
+            <div class="dc-full">Global Hostile Ontological Suppression Taskforce</div>
+          </div>
+          <p class="dc-desc"><span class="redact">Suppression of hostile ontological phenomena appearing in public settings, monitored through a surveillance network with no official coverage map</span>.</p>
+        </div>
+
+        <div class="div-card locked" style="color:var(--ink-soft);" tabindex="0">
+          <div class="dc-top">
+            <div class="dc-seal">CER</div>
+            <span class="dc-tag">Restricted</span>
+          </div>
+          <div>
+            <div class="dc-name" style="color:var(--ink);">CERBERUS</div>
+            <div class="dc-full">Critical Emergency Response Battalion: Enhanced Responders for Unprecedented Supermasses</div>
+          </div>
+          <p class="dc-desc">Advanced <span class="redact">military division for engagements beyond ARES-level response, fielding manufactured personnel at a scale budget alone decides</span>.</p>
+        </div>
+
+        <div class="div-card locked" style="color:var(--ink-soft);" tabindex="0">
+          <div class="dc-top">
+            <div class="dc-seal">CHI</div>
+            <span class="dc-tag">Restricted</span>
+          </div>
+          <div>
+            <div class="dc-name" style="color:var(--ink);">CHIMERA</div>
+            <div class="dc-full">Classified Hazard Intervention, Mutagenic Experimentation, &amp; Recontainment Agency</div>
+          </div>
+          <p class="dc-desc"><span class="redact">Unrestricted research and development, staffed by personnel qualified to double as medical response when a program requires it</span>.</p>
+        </div>
+
+      </div>
+
+      <div class="hades-row">
+        <div class="hades-card">
+          <div class="hades-top">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div class="hades-seal">H·D</div>
+              <div>
+                <div class="hades-name">H.A.D.E.S.</div>
+                <div class="hades-full">High-risk Anomalies &amp; Deities Eradication Strikeforce</div>
+              </div>
+            </div>
+            <span class="hades-tag">Signal Unstable</span>
+          </div>
+          <p class="hades-desc">Engagement of threats beyond ARES, CERBERUS, and GHOST capability. <span class="glitch-text" data-text="Thirteen operators on record. One erased from every record that isn't this one. One missing, last logged against something that called itself a god.">Thirteen operators on record. One <span class="corrupt-word" data-text="erased">erased</span> from every record that isn't this one. One <span class="corrupt-word" data-text="missing">missing</span>, last logged against something that called itself a <span class="corrupt-word" data-text="god">god</span>.</span></p>
+          <p class="hades-motto typewriter" id="hadesMotto">"Do No Evil"</p>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="classband">Unauthorized Disclosure Prohibited — SCRC Public Network</div>
+    <div class="credit-line">Pixelora Studio · <span id="creditYear"></span></div>
+  </footer>
+
+  <script>
+    document.getElementById('todayDate').textContent = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+    document.getElementById('creditYear').textContent = new Date().getFullYear();
+
+    const mottoEl = document.getElementById('hadesMotto');
+    const mottos = ['"Do No Evil"', '"Sin Knows No Crown"', '"Sin Knows No God"'];
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (mottoEl && !reduceMotion) {
+      let i = 0;
+      setInterval(() => {
+        i = (i + 1) % mottos.length;
+        mottoEl.classList.remove('flicker');
+        void mottoEl.offsetWidth;
+        mottoEl.classList.add('flicker');
+        mottoEl.textContent = mottos[i];
+      }, 3600);
+    }
+
+    const CORRUPT_CHARS = '█▓▒░#%&@*?!<>/\\|_-=+^~';
+    function scramble(len) {
+      let out = '';
+      for (let i = 0; i < len; i++) out += CORRUPT_CHARS[Math.floor(Math.random() * CORRUPT_CHARS.length)];
+      return out;
+    }
+    const corruptWords = document.querySelectorAll('.corrupt-word');
+    if (corruptWords.length) {
+      if (reduceMotion) {
+        corruptWords.forEach(el => { el.textContent = el.dataset.text; });
+      } else {
+        setInterval(() => {
+          corruptWords.forEach(el => {
+            const real = el.dataset.text;
+            if (Math.random() < 0.15) {
+              el.textContent = real;
+              el.classList.add('reveal');
+            } else {
+              el.textContent = scramble(real.length);
+              el.classList.remove('reveal');
+            }
+          });
+        }, 120);
+      }
+    }
+  </script>
+
+</body>
+</html>
