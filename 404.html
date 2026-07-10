@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Record Not Found — SCRC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Courier+Prime:wght@400;700&family=Special+Elite&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAF7F0;
+    --paper-dim:#F1ECE0;
+    --ink:#221F1B;
+    --ink-soft:#665F54;
+    --rule:#DCD4C0;
+    --spine:#1C1A17;
+    --spine-text:#A9A294;
+    --spine-text-dim:#74705F;
+    --scrc:#3B5166;
+    --scrc-soft:#7B93A3;
+  }
+  *{box-sizing:border-box;}
+  html,body{ height:100%; margin:0; }
+  body{
+    font-family:'Inter',sans-serif;
+    background:var(--spine);
+    color:var(--paper);
+    display:flex; flex-direction:column;
+  }
+  .serif{font-family:'Source Serif 4',serif;}
+  .mono{font-family:'Courier Prime',monospace;}
+  .typewriter{font-family:'Special Elite',cursive;}
+  a{ color:inherit; }
+  :focus-visible{ outline:2px solid var(--scrc-soft); outline-offset:2px; }
+
+  .paper-texture{
+    background-color:var(--paper);
+    background-image: radial-gradient(circle at 1px 1px, rgba(34,31,27,0.035) 1px, transparent 0);
+    background-size:3px 3px;
+    color:var(--ink);
+  }
+
+  .classband{
+    background:#0F0D0B; color:var(--spine-text-dim);
+    text-align:center; padding:6px 10px;
+    font-family:'Courier Prime',monospace; font-size:9.5px; letter-spacing:0.18em;
+    text-transform:uppercase; border-bottom:1px solid rgba(255,255,255,0.06);
+  }
+  footer .classband{ border-bottom:none; border-top:1px solid rgba(255,255,255,0.06); }
+
+  .site-nav{
+    background:rgba(28,26,23,0.92);
+    border-bottom:1px solid rgba(255,255,255,0.07);
+    padding:12px 24px;
+    display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
+  }
+  .nav-mark{ display:flex; align-items:center; gap:10px; }
+  .nav-seal{
+    width:32px; height:32px; border:1.5px solid var(--scrc-soft); border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Special Elite',cursive; font-size:10.5px; letter-spacing:0.5px; color:var(--scrc-soft);
+    flex-shrink:0;
+  }
+  .nav-mark .n-title{ font-size:12px; letter-spacing:0.06em; color:#EFEAE0; }
+  .nav-mark .n-sub{ font-family:'Courier Prime',monospace; font-size:9px; color:var(--spine-text-dim); }
+
+  main{ flex-grow:1; display:flex; align-items:center; justify-content:center; padding:60px 20px; }
+
+  .sheet{
+    width:100%; max-width:560px;
+    border:1px solid var(--rule);
+    box-shadow: 0 1px 0 rgba(0,0,0,0.04), 0 20px 44px rgba(0,0,0,0.4);
+  }
+  .sheet-head{
+    background:var(--paper-dim); border-bottom:1px solid var(--rule);
+    padding:10px 26px; font-size:10px; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--ink-soft); display:flex; justify-content:space-between;
+  }
+  .sheet-body{ padding:38px 30px 32px; text-align:center; }
+
+  .stamp-404{
+    display:inline-block;
+    border:3px solid var(--scrc);
+    border-radius:4px;
+    padding:8px 20px;
+    color:var(--scrc);
+    opacity:0.85;
+    font-size:15px;
+    letter-spacing:0.1em;
+    transform:rotate(-5deg);
+    margin-bottom:20px;
+    mix-blend-mode:multiply;
+  }
+
+  h1{ font-size:19px; margin:0 0 8px; }
+  .lede{ font-size:12.5px; color:var(--ink-soft); max-width:380px; margin:0 auto 22px; line-height:1.6; }
+
+  .ref-line{
+    font-family:'Courier Prime',monospace; font-size:10.5px; color:var(--ink-soft);
+    border-top:1px solid var(--rule); padding-top:16px; margin-top:6px;
+  }
+
+  .back-link{
+    display:inline-block; margin-top:20px;
+    font-family:'Courier Prime',monospace; font-size:10.5px; letter-spacing:0.06em; text-transform:uppercase;
+    color:var(--scrc); text-decoration:none; border-bottom:1px solid var(--scrc); padding-bottom:2px;
+  }
+  .back-link:hover{ color:#25384A; border-color:#25384A; }
+
+  .credit-line{ text-align:center; padding:16px; font-family:'Courier Prime',monospace; font-size:9px; color:var(--spine-text-dim); }
+</style>
+</head>
+<body>
+
+  <div class="classband">For Official Use Only — SCRC Public Network</div>
+
+  <nav class="site-nav">
+    <div class="nav-mark">
+      <div class="nav-seal">SCRC</div>
+      <div>
+        <div class="n-title">SCRC</div>
+        <div class="n-sub">Strategic Crisis Response Command</div>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <div class="sheet paper-texture">
+      <div class="sheet-head">
+        <span>SYSTEM NOTICE</span>
+        <span id="todayDate"></span>
+      </div>
+      <div class="sheet-body">
+        <div class="stamp-404 typewriter">NOT ON FILE</div>
+        <h1 class="serif">Record Not Found</h1>
+        <p class="lede serif">The reference you've requested does not exist in this system, or has been moved, archived, or restricted. No record was located under the given path.</p>
+        <div class="ref-line">ERROR CODE 404 — SCRC-MAIN</div>
+        <a href="./index.html" class="back-link mono">Return to SCRC</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="classband">Unauthorized Disclosure Prohibited — SCRC Public Network</div>
+    <div class="credit-line">Pixelora Studio · <span id="creditYear"></span></div>
+  </footer>
+
+  <script>
+    document.getElementById('todayDate').textContent = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+    document.getElementById('creditYear').textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>

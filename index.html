@@ -191,6 +191,11 @@
     background:#15100E; border:1px solid rgba(139,30,63,0.35);
     padding:26px 28px; position:relative; overflow:hidden;
     display:flex; flex-direction:column; gap:12px;
+    text-decoration:none; color:inherit; cursor:pointer;
+    transition:border-color .2s, background .2s;
+  }
+  .hades-card:hover, .hades-card:focus-visible{
+    border-color:rgba(139,30,63,0.7); background:#1B1310;
   }
   .hades-top{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
   .hades-seal{
@@ -393,7 +398,7 @@
       </div>
 
       <div class="hades-row">
-        <div class="hades-card">
+        <a class="hades-card" href="https://hades.pixelora.id">
           <div class="hades-top">
             <div style="display:flex; align-items:center; gap:12px;">
               <div class="hades-seal">H·D</div>
@@ -406,7 +411,7 @@
           </div>
           <p class="hades-desc">Engagement of threats beyond ARES, CERBERUS, and GHOST capability. <span class="glitch-text" data-text="Thirteen operators on record. One erased from every record that isn't this one. One missing, last logged against something that called itself a god.">Thirteen operators on record. One <span class="corrupt-word" data-text="erased">erased</span> from every record that isn't this one. One <span class="corrupt-word" data-text="missing">missing</span>, last logged against something that called itself a <span class="corrupt-word" data-text="god">god</span>.</span></p>
           <p class="hades-motto typewriter" id="hadesMotto">"Do No Evil"</p>
-        </div>
+        </a>
       </div>
 
     </section>
